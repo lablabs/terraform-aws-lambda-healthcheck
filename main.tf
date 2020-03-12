@@ -1,5 +1,5 @@
 locals {
-  name = "${var.target_url}-healthcheck"
+  name = "${var.name}-healthcheck"
 }
 
 resource "aws_iam_role" "this" {
