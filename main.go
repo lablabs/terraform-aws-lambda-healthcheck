@@ -81,7 +81,10 @@ func webIsReachable(web string) bool {
 		panic(err)
 	}
 
-	req.SetBasicAuth(auth.Username, auth.Password)
+	if auth != nil {
+		req.SetBasicAuth(auth.Username, auth.Password)
+	}
+
 	response, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
