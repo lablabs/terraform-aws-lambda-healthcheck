@@ -66,10 +66,11 @@ resource "aws_lambda_function" "this" {
 
   environment {
     variables = {
-      REGION            = var.region
-      CW_METRIC_NAME    = var.cw_metric_name
+      REGION              = var.region
+      CW_METRIC_NAME      = var.cw_metric_name
       CW_METRIC_NAMESPACE = var.cw_metric_namespace
-      TARGET_URL  = var.target_url
+      TARGET_URL          = var.target_url
+      SECRET_NAME         = var.secret_name
     }
   }
 }
