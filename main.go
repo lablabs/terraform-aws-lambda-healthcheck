@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -41,7 +42,6 @@ func HandleRequest(ctx context.Context, req Request) (string, error) {
 	} else {
 		pushMetric(0)
 	}
-
 	return "Finished", nil
 }
 
@@ -170,6 +170,5 @@ func getSecret() *HttpBasicAuth {
 }
 
 func main() {
-	HandleRequest(nil, Request{})
-	// lambda.Start(HandleRequest)
+	lambda.Start(HandleRequest)
 }
