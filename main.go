@@ -103,7 +103,7 @@ func webIsReachable(web string) bool {
 		log.Print("Target website returned ", response.Status)
 		return true
 	} else {
-		log.Fatal("Target website returned ", response.Status)
+		log.Print("Target website returned ", response.Status)
 	}
 
 	return false
