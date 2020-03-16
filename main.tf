@@ -104,3 +104,10 @@ resource "aws_lambda_permission" "this" {
   source_arn    = aws_cloudwatch_event_rule.trigger.arn
 }
 
+module "health_log" {
+  source            = "lablabs/dynamodb/aws"
+  version           = "0.15.0"
+  name              = "${var.name}-healthcheck"
+  hash_key          = "test"
+  enable_autoscaler = false
+}
