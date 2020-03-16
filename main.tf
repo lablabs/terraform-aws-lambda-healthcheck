@@ -108,6 +108,6 @@ module "health_log" {
   source            = "lablabs/dynamodb/aws"
   version           = "0.15.0"
   name              = "${var.name}-healthcheck"
-  hash_key          = "test"
+  hash_key          = "timestamp"
   enable_autoscaler = false
 }
