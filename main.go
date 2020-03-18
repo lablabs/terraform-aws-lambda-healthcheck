@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -166,6 +167,6 @@ func getSecret() *httpBasicAuth {
 }
 
 func main() {
-	handleRequest(nil, request{})
-	// lambda.Start(handleRequest)
+	// handleRequest(nil, request{})
+	lambda.Start(handleRequest)
 }
