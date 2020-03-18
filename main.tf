@@ -41,7 +41,8 @@ resource "aws_iam_policy" "this" {
      },
      {
       "Action": [
-        "cloudwatch:PutMetricData"
+        "cloudwatch:PutMetricData",
+        "ec2:CreateNetworkInterface"
       ],
       "Resource": "*",
       "Effect": "Allow"
