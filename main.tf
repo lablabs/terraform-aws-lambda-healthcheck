@@ -48,6 +48,13 @@ resource "aws_iam_policy" "this" {
       ],
       "Resource": "*",
       "Effect": "Allow"
+     },
+     {
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Resource": "arn:aws:secretsmanager:${var.region}:*:secret:${var.secret_name}*",
+      "Effect": "Allow"
      }
   ]
 }
