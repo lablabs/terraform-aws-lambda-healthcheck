@@ -75,7 +75,7 @@ resource "aws_lambda_function" "this" {
 
   vpc_config {
     subnet_ids         = var.subnet_ids
-    security_group_ids = []
+    security_group_ids = var.sg_ids
   }
 
   environment {

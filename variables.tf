@@ -11,3 +11,4 @@ variable "secret_name" {
 }
 
 variable "subnet_ids" {}
+variable "sg_ids" {}
