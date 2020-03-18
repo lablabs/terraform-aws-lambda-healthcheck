@@ -73,6 +73,11 @@ resource "aws_lambda_function" "this" {
 
   runtime = "go1.x"
 
+  vpc_config {
+    subnet_ids         = var.subnet_ids
+    security_group_ids = []
+  }
+
   environment {
     variables = {
       REGION              = var.region

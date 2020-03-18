@@ -9,3 +9,5 @@ variable "name" {}
 variable "secret_name" {
   default = ""
 }
+
+variable "subnet_ids" {}
