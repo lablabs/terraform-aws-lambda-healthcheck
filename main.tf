@@ -43,7 +43,8 @@ resource "aws_iam_policy" "this" {
       "Action": [
         "cloudwatch:PutMetricData",
         "ec2:CreateNetworkInterface",
-        "ec2:DescribeNetworkInterfaces"
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteNetworkInterface"
       ],
       "Resource": "*",
       "Effect": "Allow"
