@@ -9,7 +9,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -24,24 +23,20 @@ var (
 	secretName      string
 )
 
-type Request struct{}
+type request struct{}
 
-type HttpBasicAuth struct {
+type httpBasicAuth struct {
 	Username string
 	Password string
 }
 
-func HandleRequest(ctx context.Context, req Request) (string, error) {
+func handleRequest(ctx context.Context, req request) (string, error) {
 	metricNamespace = os.Getenv("CW_METRIC_NAMESPACE")
 	url = os.Getenv("TARGET_URL")
 	metricName = os.Getenv("CW_METRIC_NAME")
 	result := webIsReachable(url)
 
-	if result == true {
-		pushMetric(1)
-	} else {
-		pushMetric(0)
-	}
+	pushMetric(float64(result))
 	return "Finished", nil
 }
 
@@ -62,6 +57,12 @@ func pushMetric(value float64) {
 				MetricName: &metricName,
 				Value:      &value,
 				Timestamp:  &now,
+				Dimensions: []*cloudwatch.Dimension{
+					&cloudwatch.Dimension{
+						Name:  aws.String("HealthcheckTarget"),
+						Value: &url,
+					},
+				},
 			},
 		},
 		Namespace: &metricNamespace,
@@ -71,9 +72,11 @@ func pushMetric(value float64) {
 	}
 }
 
-func webIsReachable(web string) bool {
+func webIsReachable(web string) int {
 
-	auth := getSecret()
+	var auth *httpBasicAuth
+
+	auth = getSecret()
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", web, nil)
@@ -96,20 +99,13 @@ func webIsReachable(web string) bool {
 			fmt.Fprintf(os.Stderr, "no internet\n")
 			os.Exit(1)
 		}
-		return false
 	}
 
-	if response.StatusCode == 200 {
-		log.Print("Target website returned ", response.Status)
-		return true
-	} else {
-		log.Print("Target website returned ", response.Status)
-	}
-
-	return false
+	log.Print("Target website returned ", response.Status)
+	return response.StatusCode
 }
 
-func getSecret() *HttpBasicAuth {
+func getSecret() *httpBasicAuth {
 	region := os.Getenv("REGION")
 	secretName = os.Getenv("SECRET_NAME")
 
@@ -153,7 +149,7 @@ func getSecret() *HttpBasicAuth {
 			// Message from an error.
 			fmt.Println(err.Error())
 		}
-		return nil
+		panic(err)
 	}
 
 	// Decrypts secret using the associated KMS CMK.
@@ -163,12 +159,13 @@ func getSecret() *HttpBasicAuth {
 		secretString = *result.SecretString
 	}
 
-	var httpBasicAuth HttpBasicAuth
+	var httpBasicAuth httpBasicAuth
 	json.Unmarshal([]byte(secretString), &httpBasicAuth)
 
 	return &httpBasicAuth
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	handleRequest(nil, request{})
+	// lambda.Start(handleRequest)
 }
