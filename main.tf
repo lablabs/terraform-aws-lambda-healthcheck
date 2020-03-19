@@ -120,3 +120,17 @@ resource "aws_lambda_permission" "this" {
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.trigger.arn
 }
+
+resource "aws_cloudwatch_metric_alarm" "default" {
+  alarm_name                = "${var.target_url} not healthy"
+  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  evaluation_periods        = "2"
+  metric_name               = var.cw_metric_name
+  namespace                 = var.cw_metric_namespace
+  period                    = "300"
+  statistic                 = "Maximum"
+  threshold                 = "200"
+  alarm_description         = "Monitors health of a specified endpoint"
+  insufficient_data_actions = []
+  treat_missing_data        = "breaching"
+}
