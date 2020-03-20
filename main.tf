@@ -140,7 +140,8 @@ resource "aws_cloudwatch_metric_alarm" "default" {
 }
 
 resource "aws_sns_topic" "sns" {
-  name = "${var.name}-healthcheck"
+  provider = aws.alarm
+  name     = "${var.name}-healthcheck"
 }
 
 
