@@ -134,4 +134,13 @@ resource "aws_cloudwatch_metric_alarm" "default" {
   alarm_description         = "Monitors health of a specified endpoint"
   insufficient_data_actions = []
   treat_missing_data        = "breaching"
+
+  alarm_actions = [aws_sns_topic.sns.arn]
+  ok_actions    = [aws_sns_topic.sns.arn]
 }
+
+resource "aws_sns_topic" "sns" {
+  name = "${var.name}-healthcheck"
+}
+
+
