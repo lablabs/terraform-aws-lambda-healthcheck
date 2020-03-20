@@ -123,7 +123,7 @@ resource "aws_lambda_permission" "this" {
 
 resource "aws_cloudwatch_metric_alarm" "default" {
   alarm_name                = "${var.target_url} not healthy"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
+  comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = "2"
   metric_name               = var.cw_metric_name
   namespace                 = var.cw_metric_namespace
