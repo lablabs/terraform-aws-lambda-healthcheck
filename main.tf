@@ -135,6 +135,11 @@ resource "aws_cloudwatch_metric_alarm" "default" {
   insufficient_data_actions = []
   treat_missing_data        = "breaching"
 
+  dimensions = {
+    HealthcheckTarget = var.target_url
+  }
+
+
   alarm_actions = [aws_sns_topic.sns.arn]
   ok_actions    = [aws_sns_topic.sns.arn]
 }
