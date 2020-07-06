@@ -148,5 +148,3 @@ resource "aws_sns_topic" "sns" {
   provider = aws.alarm
   name     = "${var.name}-healthcheck"
 }
-
-
