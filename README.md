@@ -18,7 +18,8 @@ A terraform module to deploy a health check lambda function and to provide AWS C
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.0 |
+| terraform | >= 0.12.0 |
+| aws | >= 2.0, < 4.0 |
 
 ## Inputs
 
