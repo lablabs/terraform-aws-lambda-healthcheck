@@ -122,7 +122,6 @@ resource "aws_lambda_permission" "this" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "default" {
-  provider                  = aws.alarm
   alarm_name                = "${var.target_url} not healthy"
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = "2"
@@ -145,6 +144,5 @@ resource "aws_cloudwatch_metric_alarm" "default" {
 }
 
 resource "aws_sns_topic" "sns" {
-  provider = aws.alarm
-  name     = "${var.name}-healthcheck"
+  name = "${var.name}-healthcheck"
 }

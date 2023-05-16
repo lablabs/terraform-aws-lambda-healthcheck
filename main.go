@@ -156,7 +156,7 @@ func getSecret() *httpBasicAuth {
 	// Decrypts secret using the associated KMS CMK.
 	// Depending on whether the secret is a string or binary, one of these fields will be populated.
 	var secretString string
-	if result.SecretString != nil {
+	if result.SecretString != nil {				//pragma: allowlist secret
 		secretString = *result.SecretString
 	}
 

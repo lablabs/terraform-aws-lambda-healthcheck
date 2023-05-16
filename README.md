@@ -18,27 +18,45 @@ A terraform module to deploy a health check lambda function and to provide AWS C
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.0 |
-| aws | >= 2.0, < 4.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_cloudwatch_event_rule.trigger](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
+| [aws_cloudwatch_event_target.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
+| [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_cloudwatch_metric_alarm.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
+| [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [aws_lambda_permission.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_sns_topic.sns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| cw\_metric\_name | CloudWatch metric name | `any` | n/a | yes |
-| cw\_metric\_namespace | CloudWatch metric namespace | `any` | n/a | yes |
-| name | n/a | `any` | n/a | yes |
-| region | n/a | `any` | n/a | yes |
-| sg\_ids | n/a | `any` | n/a | yes |
-| subnet\_ids | n/a | `any` | n/a | yes |
-| target\_url | URL which is checked by the lambda function | `any` | n/a | yes |
-| lambda\_schedule | n/a | `string` | `"cron(*/5 * * * ? *)"` | no |
-| secret\_name | n/a | `string` | `""` | no |
+| <a name="input_cw_metric_name"></a> [cw\_metric\_name](#input\_cw\_metric\_name) | CloudWatch metric name | `string` | n/a | yes |
+| <a name="input_cw_metric_namespace"></a> [cw\_metric\_namespace](#input\_cw\_metric\_namespace) | CloudWatch metric namespace | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | n/a | `string` | n/a | yes |
+| <a name="input_sg_ids"></a> [sg\_ids](#input\_sg\_ids) | n/a | `list(string)` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | n/a | `list(string)` | n/a | yes |
+| <a name="input_target_url"></a> [target\_url](#input\_target\_url) | URL which is checked by the lambda function | `string` | n/a | yes |
+| <a name="input_lambda_schedule"></a> [lambda\_schedule](#input\_lambda\_schedule) | n/a | `string` | `"cron(*/5 * * * ? *)"` | no |
+| <a name="input_secret_name"></a> [secret\_name](#input\_secret\_name) | n/a | `string` | `""` | no |
 
 ## Outputs
 
-No output.
-
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Contributing and reporting issues
