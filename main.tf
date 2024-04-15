@@ -83,7 +83,7 @@ resource "aws_lambda_function" "this" {
 
   source_code_hash = filebase64sha256("${path.module}/lambda.zip")
 
-  runtime = "go1.x"
+  runtime = "provided.al2023"
 
   vpc_config {
     subnet_ids         = var.subnet_ids
