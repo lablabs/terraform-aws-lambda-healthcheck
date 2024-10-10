@@ -10,7 +10,7 @@ on:
 env:
   PYTHON_VERSION: "3.10"
   TERRAFORM_DOCS_VERSION: "v0.16.0"
-  TFLINT_VERSION: "v0.40.1"
+  TFLINT_VERSION: "v0.46.1"
 
 permissions:
   contents: read

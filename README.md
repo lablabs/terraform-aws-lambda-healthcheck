@@ -74,6 +74,20 @@ check your code before you will create pull-requests. See
 [GitHub Actions documentation](https://docs.github.com/en/actions) for further
 details.
 
+### Building lambda package
+
+- use `asdf` to install necessary go version
+- compile go code
+- zip compiled code and push to the repository
+
+```bash
+asdf install
+
+GOARCH=amd64 GOOS=linux go build -o bootstrap main.go
+
+zip lambda.zip bootstrap
+
+```
 
 ## License
 
